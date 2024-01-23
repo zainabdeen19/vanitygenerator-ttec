@@ -1,0 +1,126 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "3b9833b3-c617-469b-98d3-174debc83f96",
+  "Metadata": {
+    "entryPointPosition": { "x": 40, "y": 40 },
+    "ActionMetadata": {
+      "25fd7798-b26b-4cac-ad1b-0f928077aaa3": {
+        "position": { "x": 565.6, "y": 368.8 }
+      },
+      "be7cb19c-2cf3-4067-990a-5f6cdad60b37": {
+        "position": { "x": 817.6, "y": 268 }
+      },
+      "3b9833b3-c617-469b-98d3-174debc83f96": {
+        "position": { "x": 160.8, "y": 42.4 }
+      },
+      "9cf3ff58-8ff1-4fe6-8da4-52321872586f": {
+        "position": { "x": 1108, "y": 167.2 }
+      },
+      "69d5dbd9-4427-44ac-9f9a-adb65f4efce7": {
+        "position": { "x": 446.4, "y": 57.6 },
+        "parameters": {
+          "LambdaFunctionARN": { "displayName": "VanityGenerator" }
+        },
+        "dynamicMetadata": {}
+      },
+      "37711ddc-eac8-49f1-b53f-a5eaae0cfa8f": {
+        "position": { "x": 824.8, "y": 35.2 }
+      }
+    },
+    "name": "VanityGen",
+    "description": "",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "Text": "There was problem while generating your vanity numbers. Please call again later. "
+      },
+      "Identifier": "25fd7798-b26b-4cac-ad1b-0f928077aaa3",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "9cf3ff58-8ff1-4fe6-8da4-52321872586f",
+        "Errors": [
+          {
+            "NextAction": "9cf3ff58-8ff1-4fe6-8da4-52321872586f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "There was Problem issue while generating your vanity numbers. Please call again later."
+      },
+      "Identifier": "be7cb19c-2cf3-4067-990a-5f6cdad60b37",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "9cf3ff58-8ff1-4fe6-8da4-52321872586f",
+        "Errors": [
+          {
+            "NextAction": "9cf3ff58-8ff1-4fe6-8da4-52321872586f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Welcome to Zayn Abdeen's Vanity Generator Service. Please wait for few seconds while we generate your vanity numbers. "
+      },
+      "Identifier": "3b9833b3-c617-469b-98d3-174debc83f96",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "69d5dbd9-4427-44ac-9f9a-adb65f4efce7",
+        "Errors": [
+          {
+            "NextAction": "25fd7798-b26b-4cac-ad1b-0f928077aaa3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "9cf3ff58-8ff1-4fe6-8da4-52321872586f",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "${lambda_arn}",
+        "InvocationTimeLimitSeconds": "5",
+        "ResponseValidation": { "ResponseType": "STRING_MAP" }
+      },
+      "Identifier": "69d5dbd9-4427-44ac-9f9a-adb65f4efce7",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "37711ddc-eac8-49f1-b53f-a5eaae0cfa8f",
+        "Errors": [
+          {
+            "NextAction": "be7cb19c-2cf3-4067-990a-5f6cdad60b37",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "Numbers were generated successfully. Your generated phone numbers are <say-as interpret-as=\"characters\">$.External.first_num</say-as>\n\n<say-as interpret-as=\"characters\">$.External.second_num</say-as>\n\n\n<say-as interpret-as=\"characters\">$.External.third_num</say-as>\n"
+      },
+      "Identifier": "37711ddc-eac8-49f1-b53f-a5eaae0cfa8f",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "9cf3ff58-8ff1-4fe6-8da4-52321872586f",
+        "Errors": [
+          {
+            "NextAction": "9cf3ff58-8ff1-4fe6-8da4-52321872586f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
